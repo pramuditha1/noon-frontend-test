@@ -1,0 +1,31 @@
+/* Footer.module.css */
+/* footer should be fixed and 0 from left and -1 from bottom */
+.footer {
+    position: fixed;
+    bottom: -1px;
+    left: 0px;
+    width: 100%;
+    display: flex;
+    background-color: #f0548f;
+  }
+
+  .footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .footer li {
+    margin-left: 5rem;
+  }
+  
+  .footer a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+  
+  .footer a:hover,
+  .footer a:active,
+  .footer a.active {
+    color: rgb(242, 190, 235);
+  }
