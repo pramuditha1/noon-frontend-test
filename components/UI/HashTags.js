@@ -9,7 +9,7 @@ const HashTags = ({tagValues}) => {
     });
     return tagString;
   };
-  return <p className={classes.tagsList}>{constructTags(tagValues)}</p>;
+  return tagValues && <p className={classes.tagsList}>{constructTags(tagValues)}</p>;
 };
 
 export default HashTags;
