@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import classes from "./Header.module.css";
+import { HOME, LIKED} from "../../utils/locale";
 
 const Header = () => {
   return (
@@ -8,10 +9,10 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/">{HOME}</Link>
           </li>
           <li>
-            <Link href="/liked">Liked</Link>
+            <Link href="/liked">{LIKED}</Link>
           </li>
         </ul>
       </nav>

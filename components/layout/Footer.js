@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import HomeIcon from '@mui/icons-material/Home';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import classes from "./Footer.module.css";
+import IconHome from "../ui-elements/IconHome";
+import IconFavourite from "../ui-elements/IconFavourite";
 
 const Footer = () => {
   return (
@@ -11,12 +11,12 @@ const Footer = () => {
         <ul>
           <li>
             <Link href="/">
-              <HomeIcon />
+              <IconHome fontSize="large"/>
             </Link>
           </li>
           <li>
             <Link href="/liked">
-              <FavoriteIcon />
+              <IconFavourite fontSize="large"/>
             </Link>
           </li>
         </ul>

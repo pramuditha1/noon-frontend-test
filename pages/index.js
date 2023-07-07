@@ -1,6 +1,6 @@
 const HomePage = (props) => {
   return <>
-    Home page
+
   </>
 }
 
