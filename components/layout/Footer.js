@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import classes from "./Footer.module.css";
-import IconHome from "../ui-elements/IconHome";
-import IconFavourite from "../ui-elements/IconFavourite";
+import IconHome from "../UI/IconHome";
+import IconFavourite from "../UI/IconFavourite";
 
 const Footer = () => {
   return (
