@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addPost } from "../../store/slices/posts";
 import { formatNumberInThousands } from "../../utils/helper";
 import { msg_no_details } from "../../utils/locale";
 import HashTags from "../UI/HashTags";
@@ -6,6 +8,10 @@ import IconFavourite from "../UI/IconFavourite";
 import classes from "./PostCard.module.css";
 
 const PostCard = ({ postDetails }) => {
+  const dispatch = useDispatch();
+  const handleAddFavourite = () => {
+    dispatch(addPost())
+  };
   if (!postDetails) {
     return <h2>{msg_no_details}</h2>;
   }
@@ -25,6 +31,7 @@ const PostCard = ({ postDetails }) => {
         <h5>{postDetails?.subTitle}</h5>
         <h4>{postDetails?.title}</h4>
         <IconFavourite
+        onClick={handleAddFavourite}
           className={classes.imageContainerLikeButton}
           sx={{ color: "white" }}
           fontSize="medium"
