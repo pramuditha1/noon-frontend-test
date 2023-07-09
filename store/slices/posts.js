@@ -8,7 +8,7 @@ const initialState = {
 export const getPosts = createAsyncThunk(
   'posts/getPosts',//this posts/addPosts works as a action type. you can see it on redux dev tools
   async () => {
-    const response = await fetch('http://localhost:4000/posts/', {
+    const response = await fetch('http://localhost:4000/favouritePosts/posts/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+const { toString } = require('lodash');
 
 const initialState = {
   data: [],
@@ -36,6 +37,21 @@ export const getLikedPosts = createAsyncThunk(
   }
 );
 
+export const deletePost = createAsyncThunk(
+  'posts/deletePost',//this posts/addLikedPost works as a action type. you can see it on redux dev tools
+  async (id) => {
+    const response = await fetch(`http://localhost:4000/favouritePosts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    //after dispatching api request, returns the post object as the action payload
+    return data;
+  }
+);
+
 const postsSlice = createSlice({
   name: 'favouritePosts',
   initialState,
@@ -46,10 +62,20 @@ const postsSlice = createSlice({
         state.loading = true;
       })
       .addCase(addPost.fulfilled, (state, action) => {
-        // no need to implement reducer action for ading post to redux store. we can handle it here
-        state.data.push(action.payload);
-        state.loading = false;
-      })
+        const { id } = action.payload;
+        //do not add existing posts into favourites redux state object. if exists api returns post id with error
+        const existingPostIndex = state.data.findIndex((post) => post._id === id);
+        if (existingPostIndex === -1) {
+          state.data.push(action.payload); // Add the new post to favouritePosts
+          state.loading = false;
+          state.error = "";
+        } else {
+          // Handle the error where the post already exists
+          state.loading = false;
+          state.error = "Post already exists.";
+          state.existingID= id;
+        }
+      })      
       .addCase(addPost.rejected, (state) => {
         state.loading = false;
       })
@@ -61,6 +87,18 @@ const postsSlice = createSlice({
         state.loading = false;
       })
       .addCase(getLikedPosts.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(deletePost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        const { id } = action.payload;
+        //remove post from redux store favouritePosts object
+        state.data = state.data.filter(post => toString(post._id) !== toString(id))
+        state.loading = false;
+      })
+      .addCase(deletePost.rejected, (state) => {
         state.loading = false;
       })
   },

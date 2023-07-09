@@ -9,6 +9,6 @@ export const formatNumberInThousands = (value) => {
         //format numbers greater than 999,000
         return `${round(abbreviatedNumber/1000, 1)}M`;
     } else {
-        return value.toString();
+        return value?.toString();
     }
 }
