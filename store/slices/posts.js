@@ -8,7 +8,7 @@ const initialState = {
 export const addPost = createAsyncThunk(
   'posts/addPost',//this posts/addPosts works as a action type. you can see it on redux dev tools
   async (postData) => {
-    const response = await fetch('http://localhost:4000/posts/', {
+    const response = await fetch('http://localhost:4000/favouritePosts/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,26 +21,8 @@ export const addPost = createAsyncThunk(
   }
 );
 
-export const likePost = createAsyncThunk(
-  'posts/likePost',
-  async ({ postId, likedUserId }) => {
-    const response = await fetch(`http://localhost:4000/posts/${postId}/like`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        likedUserId,
-      }),
-    });
-    const updatedPost = await response.json();
-    return { postId, updatedPost };
-  }
-);
-
-
 const postsSlice = createSlice({
-  name: 'posts',
+  name: 'favouritePosts',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -56,22 +38,6 @@ const postsSlice = createSlice({
       .addCase(addPost.rejected, (state) => {
         state.loading = false;
       })
-      .addCase(likePost.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(likePost.fulfilled, (state, action) => {
-        const { postId, updatedPost } = action.payload;
-        console.log(postId, updatedPost);
-        const postIndex = state.data.findIndex((post) => toString(post.id) === toString(postId));
-        console.log("postIndex: ", postIndex);
-        if (postIndex !== -1) {
-          state.data[postIndex] = updatedPost;
-        }
-        state.loading = false;
-      })
-      .addCase(likePost.rejected, (state) => {
-        state.loading = false;
-      });
   },
 });
 

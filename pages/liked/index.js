@@ -1,7 +1,10 @@
+import LikedPosts from "../../components/Posts/likedPosts"
+
 const Liked = (props) => {
-    return <>
-      liked items show here...
-    </>
-  }
-  
-  export default Liked
+
+  return <>
+    <LikedPosts/>
+  </>
+}
+
+export default Liked
