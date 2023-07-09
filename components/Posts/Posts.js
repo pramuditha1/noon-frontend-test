@@ -10,11 +10,14 @@ const Posts = (props) => {
     dispatch(getPosts())
   }, [])
   const posts = useSelector((state) => state.posts.data)
+  const isLoading = useSelector((state) => state.posts.loading)
   return (
     <>
-      {posts && posts.map((postDetails) => (
-        <PostCard postDetails={postDetails} />
-      ))}
+      {
+        isLoading ? <h3>loading....</h3> :
+          posts.map((postDetails) => (
+            <PostCard postDetails={postDetails} showLikeButton={true} />
+          ))}
     </>
   );
 };

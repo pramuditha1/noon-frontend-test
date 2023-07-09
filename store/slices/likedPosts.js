@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const addPost = createAsyncThunk(
-  'posts/addLikedPost',//this posts/addPosts works as a action type. you can see it on redux dev tools
+  'posts/addLikedPost',//this posts/addLikedPost works as a action type. you can see it on redux dev tools
   async (postData) => {
     const response = await fetch('http://localhost:4000/favouritePosts/', {
       method: 'POST',
@@ -22,7 +22,7 @@ export const addPost = createAsyncThunk(
 );
 
 export const getLikedPosts = createAsyncThunk(
-  'posts/getLikedPosts',//this posts/addPosts works as a action type. you can see it on redux dev tools
+  'posts/getLikedPosts',//this posts/getLikedPosts works as a action type. you can see it on redux dev tools
   async () => {
     const response = await fetch('http://localhost:4000/favouritePosts/', {
       method: 'GET',

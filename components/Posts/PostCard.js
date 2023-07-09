@@ -7,7 +7,7 @@ import HashTags from "../UI/HashTags";
 import IconFavourite from "../UI/IconFavourite";
 import classes from "./PostCard.module.css";
 
-const PostCard = ({ postDetails }) => {
+const PostCard = ({ postDetails, showLikeButton }) => {
   const dispatch = useDispatch();
 
   //adding favourite items into favoutitePosts redux object
@@ -33,12 +33,12 @@ const PostCard = ({ postDetails }) => {
         <img src={postDetails?.image} alt={postDetails?.title} />
         <h5>{postDetails?.subTitle}</h5>
         <h4>{postDetails?.title}</h4>
-        <IconFavourite
+        {showLikeButton && <IconFavourite
           onClick={addToFavourites}
           className={classes.imageContainerLikeButton}
           sx={{ color: "white" }}
           fontSize="medium"
-        />
+        />}
       </div>
 
       <div className={classes.cardContent}>
