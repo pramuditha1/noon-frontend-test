@@ -5,37 +5,35 @@ const initialState = {
   loading: false,
 };
 
-export const addPost = createAsyncThunk(
-  'posts/addPost',//this posts/addPosts works as a action type. you can see it on redux dev tools
-  async (postData) => {
-    const response = await fetch('http://localhost:4000/favouritePosts/', {
-      method: 'POST',
+export const getPosts = createAsyncThunk(
+  'posts/getPosts',//this posts/addPosts works as a action type. you can see it on redux dev tools
+  async () => {
+    const response = await fetch('http://localhost:4000/posts/', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(postData),
     });
-    const post = await response.json();
+    const posts = await response.json();
     //after dispatching api request, returns the post object as the action payload
-    return post;
+    return posts;
   }
 );
 
 const postsSlice = createSlice({
-  name: 'favouritePosts',
+  name: 'posts',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addPost.pending, (state) => {
+      .addCase(getPosts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(addPost.fulfilled, (state, action) => {
-        // no need to implement reducer action for ading post to redux store. we can handle it here
-        state.data.push(action.payload);
+      .addCase(getPosts.fulfilled, (state, action) => {
+        state.data = action.payload;
         state.loading = false;
       })
-      .addCase(addPost.rejected, (state) => {
+      .addCase(getPosts.rejected, (state) => {
         state.loading = false;
       })
   },

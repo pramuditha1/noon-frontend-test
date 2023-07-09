@@ -1,12 +1,18 @@
 import { MOCK_POST_DETAILS } from "../../utils/constants";
-import PostCard from "./PostCard";
+import { useSelector, useDispatch } from "react-redux"
+import PostCard from "./PostCard"
+import { useEffect } from "react";
+import { getPosts } from "../../store/slices/posts";
 
 const Posts = (props) => {
-  const postDetailsArray = MOCK_POST_DETAILS;
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPosts())
+  }, [])
+  const posts = useSelector((state) => state.posts.data)
   return (
     <>
-      {postDetailsArray.map((postDetails) => (
+      {posts && posts.map((postDetails) => (
         <PostCard postDetails={postDetails} />
       ))}
     </>

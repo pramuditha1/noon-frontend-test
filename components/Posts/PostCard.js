@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addPost } from "../../store/slices/posts";
+import { addPost } from "../../store/slices/likedPosts";
 import { formatNumberInThousands } from "../../utils/helper";
 import { msg_no_details } from "../../utils/locale";
 import HashTags from "../UI/HashTags";
