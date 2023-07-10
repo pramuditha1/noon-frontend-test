@@ -1,8 +1,8 @@
 import React from "react";
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Dislike = (props) => {
-  return <ThumbDownOffAltIcon {...props} />;
+  return <DeleteIcon {...props}/>;
 };
 
 export default Dislike;

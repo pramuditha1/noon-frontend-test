@@ -4,6 +4,9 @@ import PostCard from "./PostCard"
 import { useEffect } from "react";
 import { getPosts } from "../../store/slices/posts";
 import { getLikedPosts } from "../../store/slices/likedPosts";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import { no_data_message_homepage } from "../../utils/locale";
+import HtmlMessage from "../UI/HtmlMessage";
 
 const Posts = (props) => {
   const dispatch = useDispatch();
@@ -17,8 +20,11 @@ const Posts = (props) => {
   return (
     <>
       {
-        isLoading ? (<h3>loading....</h3>) :
-          posts.length === 0 ? (<h3>no data...</h3>) :
+        isLoading ? (<LoadingSpinner styles={{ display: 'flex', justifyContent: 'center' }} />) :
+          posts.length === 0 ? (
+            <HtmlMessage message={no_data_message_homepage}
+              styles={{ display: 'flex', justifyContent: 'center', color: 'gray' }} />
+          ) :
             (posts.map((postDetails) => (
               <PostCard postDetails={postDetails} isHome={true} />
             )))}
