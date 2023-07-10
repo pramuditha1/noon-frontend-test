@@ -45,13 +45,13 @@ const PostCard = ({ postDetails, isHome }) => {
           onClick={addToFavourites}
           className={classes.imageContainerLikeButton}
           sx={{ color: "white" }}
-          fontSize="medium"
+          fontSize="large"
         />}
         {!isHome && <Dislike
           onClick={dislikePost}
           className={classes.imageContainerLikeButton}
           sx={{ color: "red" }}
-          fontSize="medium"
+          fontSize="large"
         />}
       </div>
 
