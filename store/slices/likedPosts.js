@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 const { toString } = require('lodash');
 
 const initialState = {
@@ -9,45 +10,39 @@ const initialState = {
 export const addPost = createAsyncThunk(
   'posts/addLikedPost',//this posts/addLikedPost works as a action type. you can see it on redux dev tools
   async (postData) => {
-    const response = await fetch('http://localhost:4000/favouritePosts/', {
-      method: 'POST',
+    const response = await axios.post('http://localhost:4000/favouritePosts/', postData, {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(postData),
     });
-    const post = await response.json();
+    const post = response.data;
     //after dispatching api request, returns the post object as the action payload
     return post;
   }
 );
 
 export const getLikedPosts = createAsyncThunk(
-  'posts/getLikedPosts',//this posts/getLikedPosts works as a action type. you can see it on redux dev tools
+  'posts/getLikedPosts',
   async () => {
-    const response = await fetch('http://localhost:4000/favouritePosts/', {
-      method: 'GET',
+    const response = await axios.get('http://localhost:4000/favouritePosts/', {
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    const posts = await response.json();
-    //after dispatching api request, returns the post object as the action payload
+    const posts = response.data;
     return posts;
   }
 );
 
 export const deletePost = createAsyncThunk(
-  'posts/deletePost',//this posts/addLikedPost works as a action type. you can see it on redux dev tools
+  'posts/deletePost',
   async (id) => {
-    const response = await fetch(`http://localhost:4000/favouritePosts/${id}`, {
-      method: 'DELETE',
+    const response = await axios.delete(`http://localhost:4000/favouritePosts/${id}`, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    const data = await response.json();
-    //after dispatching api request, returns the post object as the action payload
+    const data = response.data;
     return data;
   }
 );
@@ -66,14 +61,13 @@ const postsSlice = createSlice({
         //do not add existing posts into favourites redux state object. if exists api returns post id with error
         const existingPostIndex = state.data.findIndex((post) => post._id === id);
         if (existingPostIndex === -1) {
-          state.data.push(action.payload); // Add the new post to favouritePosts
+          state.data.push(action.payload);
           state.loading = false;
           state.error = "";
         } else {
-          // Handle the error where the post already exists
           state.loading = false;
           state.error = "Post already exists.";
-          state.existingID= id;
+          state.existingID = id;
         }
       })      
       .addCase(addPost.rejected, (state) => {

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   data: [],
@@ -8,13 +9,12 @@ const initialState = {
 export const getPosts = createAsyncThunk(
   'posts/getPosts',//this posts/addPosts works as a action type. you can see it on redux dev tools
   async () => {
-    const response = await fetch('http://localhost:4000/favouritePosts/posts/', {
-      method: 'GET',
+    const response = await axios.get('http://localhost:4000/favouritePosts/posts/', {
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    const posts = await response.json();
+    const posts = response.data;
     //after dispatching api request, returns the post object as the action payload
     return posts;
   }
