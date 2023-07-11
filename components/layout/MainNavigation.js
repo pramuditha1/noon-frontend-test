@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import classes from "./MainNavigation.module.css";
 import Header from "./Header";
 import Footer from "./Footer";

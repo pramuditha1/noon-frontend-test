@@ -1,4 +1,4 @@
-import LikedPosts from "../../components/Posts/LikedPosts"
+import LikedPosts from "../../components/Posts/likedPosts"
 
 const Liked = (props) => {
 

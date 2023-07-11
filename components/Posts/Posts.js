@@ -1,4 +1,4 @@
-import { MOCK_POST_DETAILS } from "../../utils/constants";
+// import { MOCK_POST_DETAILS } from "../../utils/constants";
 import { useSelector, useDispatch } from "react-redux"
 import PostCard from "./PostCard"
 import { useEffect } from "react";

@@ -1,4 +1,3 @@
-import PostCard from "../components/Posts/PostCard";
 import Posts from "../components/Posts/Posts";
 import { MOCK_POST_DETAILS } from "../utils/constants";
 

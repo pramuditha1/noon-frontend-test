@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./HashTags.module.css";
 
+// generate hash tags using an string array
 const HashTags = ({tagValues}) => {
   const constructTags = (tags) => {
     let tagString = "";
