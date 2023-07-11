@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost, deletePost } from "../../store/slices/likedPosts";
-import { formatNumberInThousands } from "../../utils/helper";
+import { formatNumberInThousands, checkIdExists } from "../../utils/helper";
 import { already_exists, msg_no_details } from "../../utils/locale";
 import HashTags from "../UI/HashTags";
 import IconFavourite from "../UI/IconFavourite";
@@ -13,6 +13,10 @@ const PostCard = ({ postDetails, isHome }) => {
   const dispatch = useDispatch();
   const error_already_added = useSelector((state) => state.favouritePosts.error);
   const id_already_added = useSelector((state) => state.favouritePosts.existingID);
+  const likedPosts = useSelector((state) => state.favouritePosts.data);
+
+  //after liked icon will be red color, else it will be while color
+  const favourite_icon_color = checkIdExists(likedPosts, postDetails._id) ? "red" : "white";
 
   //adding favourite items into favoutitePosts redux object
   const addToFavourites = () => {
@@ -44,7 +48,7 @@ const PostCard = ({ postDetails, isHome }) => {
         {isHome && <IconFavourite
           onClick={addToFavourites}
           className={classes.imageContainerLikeButton}
-          sx={{ color: "white" }}
+          sx={{ color: favourite_icon_color }}
           fontSize="large"
         />}
         {!isHome && <Dislike
