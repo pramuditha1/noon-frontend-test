@@ -1,3 +1,6 @@
+export const LOCAL_ENV = "http://localhost:4000"
+export const PROD_ENV = "http://54.79.171.30:4000";
+
 export const MOCK_POST_DETAILS = [
     {
       user: {

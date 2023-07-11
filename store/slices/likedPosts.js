@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const { toString } = require('lodash');
+import { toString } from "lodash";
+import { PROD_ENV } from "../../utils/constants";
 
 const initialState = {
   data: [],
@@ -10,7 +11,7 @@ const initialState = {
 export const addPost = createAsyncThunk(
   'posts/addLikedPost',//this posts/addLikedPost works as a action type. you can see it on redux dev tools
   async (postData) => {
-    const response = await axios.post('http://localhost:4000/favouritePosts/', postData, {
+    const response = await axios.post(`${PROD_ENV}/favouritePosts/`, postData, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -24,7 +25,7 @@ export const addPost = createAsyncThunk(
 export const getLikedPosts = createAsyncThunk(
   'posts/getLikedPosts',
   async () => {
-    const response = await axios.get('http://localhost:4000/favouritePosts/', {
+    const response = await axios.get(`${PROD_ENV}/favouritePosts/`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -37,7 +38,7 @@ export const getLikedPosts = createAsyncThunk(
 export const deletePost = createAsyncThunk(
   'posts/deletePost',
   async (id) => {
-    const response = await axios.delete(`http://localhost:4000/favouritePosts/${id}`, {
+    const response = await axios.delete(`${PROD_ENV}/favouritePosts/${id}`, {
       headers: {
         'Content-Type': 'application/json',
       },
