@@ -1,32 +1,56 @@
 /* Footer.module.css */
 /* footer should be fixed and 0 from left and -1 from bottom */
 .footer {
-    position: fixed;
-    bottom: -1px;
-    left: 0px;
-    width: 100%;
-    display: flex;
-    background-color: #f0548f;
-    z-index: 999;
-  }
+  position: fixed;
+  bottom: -1px;
+  left: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #f0548f;
+  z-index: 999;
+}
 
-  .footer ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
+.footer nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px; /* Limit the maximum width of the ul element */
+  margin: 0 auto; /* Center the ul element horizontally */
+  padding-left: 0;
+}
+
+.footer li {
+  display: flex;
+  justify-content: center;
+  flex: 1; /* Distribute equal space among the li elements */
+}
+
+.footer a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.footer a:hover,
+.footer a:active,
+.footer a.active {
+  color: rgb(242, 190, 235);
+}
+
+.footer li:not(:last-child) {
+  margin-right: 1rem; /* Add margin between li elements except for the last one */
+}
+
+@media (max-width: 500px) {
+  /* Adjust the margin between li elements for smaller screens */
+  .footer li:not(:last-child) {
+    margin-right: 0.5rem;
   }
-  
-  .footer li {
-    margin-left: 5rem;
-  }
-  
-  .footer a {
-    text-decoration: none;
-    color: #ffffff;
-  }
-  
-  .footer a:hover,
-  .footer a:active,
-  .footer a.active {
-    color: rgb(242, 190, 235);
-  }
+}

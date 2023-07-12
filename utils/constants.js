@@ -1,5 +1,5 @@
 export const LOCAL_ENV = "http://localhost:4000"
-export const PROD_ENV = "http://54.79.171.30:4000";
+export const PROD_ENV = "https://posts-api-pramuditha-7a0c898df0a9.herokuapp.com";
 
 export const MOCK_POST_DETAILS = [
     {
